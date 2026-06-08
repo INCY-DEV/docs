@@ -1,4 +1,6 @@
-# HWID (Hardware ID)
+---
+title: "HWID (Hardware ID)"
+---
 
 Аппаратный идентификатор устройства, используемый для привязки подписок к конкретным устройствам и отслеживания активных подключений.
 
@@ -13,7 +15,7 @@ HWID — hex-строка SHA-256 хеша, производная от аппа
 **Компоненты** (объединяются через `|`):
 
 | Компонент | Источник |
-|---|---|
+| --- | --- |
 | Android ID | `Settings.Secure.ANDROID_ID` |
 | Производитель | `Build.MANUFACTURER` |
 | Модель | `Build.MODEL` |
@@ -24,20 +26,20 @@ HWID — hex-строка SHA-256 хеша, производная от аппа
 | Оборудование | `Build.HARDWARE` |
 
 **Алгоритм:**
-```
+
+```text
 deviceId = SHA256("androidId|manufacturer|model|brand|device|product|board|hardware")
 hwid = SHA256("incy_hwid_" + deviceId)
 ```
 
-**Результат:** 64 символа (hex)
-**Хранение:** EncryptedSharedPreferences (сохраняется при переустановке)
+**Результат:** 64 символа (hex) **Хранение:** EncryptedSharedPreferences (сохраняется при переустановке)
 
 ### Desktop (Linux)
 
 **Компоненты** (объединяются через `|`):
 
 | Компонент | Источник |
-|---|---|
+| --- | --- |
 | Machine ID | `/etc/machine-id` |
 | Hostname | `InetAddress.getLocalHost().hostName` |
 | OS | `System.getProperty("os.name")` |
@@ -49,7 +51,7 @@ hwid = SHA256("incy_hwid_" + deviceId)
 **Компоненты** (объединяются через `|`):
 
 | Компонент | Источник |
-|---|---|
+| --- | --- |
 | Machine GUID | `HKLM\SOFTWARE\Microsoft\Cryptography\MachineGuid` |
 | Hostname | `InetAddress.getLocalHost().hostName` |
 | OS | `System.getProperty("os.name")` |
@@ -57,31 +59,31 @@ hwid = SHA256("incy_hwid_" + deviceId)
 | Пользователь | `System.getProperty("user.name")` |
 
 **Алгоритм (Linux/Windows):**
-```
+
+```text
 deviceId = SHA256("machineId|hostname|os|arch|user")
 hwid = SHA256("incy_hwid_" + deviceId)
 ```
 
-**Результат:** 64 символа (hex)
-**Хранение:** файл `{configDir}/device_id`
+**Результат:** 64 символа (hex) **Хранение:** файл `{configDir}/device_id`
 
 ### iOS
 
 **Компоненты:**
 
 | Компонент | Источник |
-|---|---|
+| --- | --- |
 | Vendor ID | `UIDevice.current.identifierForVendor` |
 | Имя устройства | Модель устройства |
 
 **Алгоритм:**
-```
+
+```text
 raw = "{vendorID}-{deviceName}"
 deviceId = первые 16 символов hex-представления
 ```
 
-**Результат:** 16 символов (hex)
-**Хранение:** Keychain (сохраняется даже при удалении приложения)
+**Результат:** 16 символов (hex) **Хранение:** Keychain (сохраняется даже при удалении приложения)
 
 > iOS использует укороченный формат (16 символов) в отличие от Android/Desktop (64 символа).
 

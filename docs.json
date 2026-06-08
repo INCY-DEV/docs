@@ -20,7 +20,7 @@
     ],
     "groups": [
       {
-        "group": "Getting Started",
+        "group": "docs",
         "pages": [
           "admin-hwids",
           "app-management",
@@ -31,13 +31,18 @@
           "full-xray-config",
           "hwid",
           "icon-presets",
-          "premium-api",
-          "premium-billing",
-          "provider-notifications",
           "routing",
           "README",
           "share-links",
           "subscription-format"
+        ]
+      },
+      {
+        "group": "Premium",
+        "pages": [
+          "premium-api",
+          "premium-billing",
+          "provider-notifications"
         ]
       }
     ]
