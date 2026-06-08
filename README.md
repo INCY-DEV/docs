@@ -1,55 +1,38 @@
-# Mintlify Starter Kit
+# Документация для разработчиков
 
-Use the starter kit to get your docs deployed and ready to customize.
+Техническая документация по интеграции с приложением INCY.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Содержание
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+### Подписки и серверы
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+- [Формат подписки](subscription-format.md) — поддерживаемые форматы, протоколы, HTTP-заголовки
+- [Параметры share-ссылок](share-links.md) — VLESS, VMess, Trojan, Shadowsocks, Hysteria2, SOCKS5, WireGuard
+- [Полные Xray-конфигурации](full-xray-config.md) — конфиги с балансировщиками и обсерваториями
+- [Управление приложением](app-management.md) — HTTP-заголовки и параметры подписки (включая `hide-url` — скрытие URL от Share/Copy/QR/backup)
 
-## AI-assisted writing
+### Маршрутизация
 
-Set up your AI coding tool to work with Mintlify:
+- [Маршрутизация (Routing)](routing.md) — профили маршрутизации, геофайлы, правила, обрезка chunk-файлов
+- [Автообновляемая маршрутизация (Autorouting)](autorouting.md) — профили с автообновлением по URL
 
-```bash
-npx skills add https://mintlify.com/docs
-```
+### Интеграция
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+- [Deep Links](deep-links.md) — управление приложением через ссылки (включая шифрованные `incy://crypt1/<payload>` для анти-grep пересылок)
+- [HWID](hwid.md) — аппаратный идентификатор устройства
+- [Premium API](premium-api.md) — зашифрованный API конфигурации провайдера, лимиты устройств
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
+### Настройки провайдера
 
-## Development
+- [Пресет-иконки](icon-presets.md) — иконки для ссылок в Lite Mode (бот / канал / поддержка)
+- [Админ-доступ по HWID](admin-hwids.md) — правка конфигов на устройстве + auto-approve push-уведомлений
+- [Push-уведомления провайдера](provider-notifications.md) — таргетинг, модерация, отмена
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+### Premium и биллинг
 
-```
-npm i -g mint
-```
+- [Premium биллинг](premium-billing.md) — тарифы, способы оплаты, привязка аккаунта, управление подпиской
+- [VPN Аукцион](auction.md) — еженедельный аукцион за размещение в канале рекомендаций
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+### Примеры
 
-```
-mint dev
-```
-
-View your local preview at `http://localhost:3000`.
-
-## Publishing changes
-
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+- [Примеры ссылок и параметров](examples.md) — готовые примеры для интеграции
