@@ -1,11 +1,13 @@
-# Формат подписки
+---
+title: "Формат подписки"
+---
 
 Описание форматов подписок, поддерживаемых протоколов и HTTP-заголовков.
 
 ## Поддерживаемые протоколы
 
 | Протокол | Схема | Описание |
-|---|---|---|
+| --- | --- | --- |
 | VLESS | `vless://` | Основной протокол |
 | VMess | `vmess://` | JSON-based конфигурация в base64 |
 | Trojan | `trojan://` | Парольная аутентификация |
@@ -22,7 +24,7 @@
 
 Наиболее распространённый формат. Тело ответа — base64, при декодировании содержит ссылки по одной на строку:
 
-```
+```text
 base64(
   vless://uuid@server1:443?security=tls#Server1
   vless://uuid@server2:443?security=tls#Server2
@@ -35,7 +37,7 @@ base64(
 
 Ссылки в открытом виде, по одной на строку:
 
-```
+```text
 vless://uuid@server1:443?security=tls#Server1
 vmess://eyJhZGQiOiJzZXJ2ZXIyIn0=
 trojan://password@server3:443#Server3
@@ -46,6 +48,7 @@ wireguard://secretKey@server5:51820?publickey=KEY&address=10.0.0.2#Server5
 ### 3. JSON-форматы
 
 **Массив полных xray-конфигов:**
+
 ```json
 [
     { "outbounds": [...], "routing": {...} },
@@ -54,6 +57,7 @@ wireguard://secretKey@server5:51820?publickey=KEY&address=10.0.0.2#Server5
 ```
 
 **Полный xray-конфиг** (одиночный объект с `inbounds` и `outbounds`):
+
 ```json
 {
     "inbounds": [...],
@@ -67,7 +71,7 @@ wireguard://secretKey@server5:51820?publickey=KEY&address=10.0.0.2#Server5
 
 ### 4. Смешанный формат
 
-Ссылки серверов + строки маршрутизации + метаданные в одном теле:
+Ссылки серверов \+ строки маршрутизации \+ метаданные в одном теле:
 
 ```text
 vless://uuid@server1:443?security=tls#Server1
@@ -79,7 +83,7 @@ vless://uuid@server2:443?security=tls#Server2
 **Поддерживаемые специальные строки в теле:**
 
 | Паттерн | Описание |
-|---|---|
+| --- | --- |
 | `://autorouting/onadd/{url}` | Автообновляемый профиль маршрутизации (URL, с `sourceURL`) |
 | `://autorouting/add/{url}` | Автообновляемый профиль маршрутизации (URL, с `sourceURL`) |
 | `://routing/onadd/{url}` | Одноразовый импорт профиля по URL (без автообновления) |
@@ -105,7 +109,7 @@ vless://uuid@server2:443?security=tls#Server2
 ### Заголовки подписки
 
 | Заголовок | Тип | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `profile-title` | string | Имя подписки (до 25 символов). Поддерживает base64 |
 | `subscription-name` | string | Альтернатива `profile-title` (fallback) |
 | `profile-description` | string | Описание подписки. Поддерживает base64 |
@@ -125,12 +129,14 @@ vless://uuid@server2:443?security=tls#Server2
 Поддерживает два формата:
 
 **Открытый текст:**
-```
+
+```text
 profile-title: My VPN
 ```
 
 **Base64 с описанием:**
-```
+
+```text
 profile-title: base64:TWVNdiBWUE4KV2VsY29tZSB0byBvdXIgc2VydmljZQ==
 ```
 
@@ -138,18 +144,18 @@ profile-title: base64:TWVNdiBWUE4KV2VsY29tZSB0byBvdXIgc2VydmljZQ==
 
 ### Subscription User Info
 
-```
+```text
 subscription-userinfo: upload=0;download=1073741824;total=10737418240;expire=1735689600
 ```
 
 | Поле | Тип | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `upload` | int | Исходящий трафик (байт) |
 | `download` | int | Входящий трафик (байт) |
 | `total` | int | Лимит трафика (байт) |
 | `expire` | int | Дата истечения (Unix timestamp, секунды) |
 
-> Если `expire` > 32000000000 — значение интерпретируется как миллисекунды и конвертируется в секунды.
+> Если `expire` \> 32000000000 — значение интерпретируется как миллисекунды и конвертируется в секунды.
 
 **Скрытие блока трафика:**
 
@@ -159,11 +165,11 @@ subscription-userinfo: upload=0;download=1073741824;total=10737418240;expire=173
 
 Текст объявления отображается на главном экране в виде баннера. Поддерживается до **5 строк** текста, после чего текст обрезается с многоточием.
 
-```
+```text
 announce: Обновление серверов 15 марта
 ```
 
-```
+```text
 announce: base64:0J7QsdC90L7QstC70LXQvdC40LUg0YHQtdGA0LLQtdGA0L7Qsg==
 ```
 
@@ -171,12 +177,12 @@ announce: base64:0J7QsdC90L7QstC70LXQvdC40LUg0YHQtdGA0LLQtdGA0L7Qsg==
 
 Задаёт порядок сортировки серверов в приложении. При обновлении подписки значение применяется к глобальной настройке сортировки.
 
-```
+```text
 sort-order: ping
 ```
 
 | Значение | Описание |
-|---|---|
+| --- | --- |
 | `none` | Порядок по умолчанию (как в подписке) |
 | `ping` | По пингу (самые быстрые первыми) |
 | `name` | По алфавиту |
@@ -188,7 +194,7 @@ sort-order: ping
 При обновлении подписки приложение отправляет:
 
 | Заголовок | Описание |
-|---|---|
+| --- | --- |
 | `User-Agent` | `INCY/<version>/<platform>` |
 | `Accept` | `*/*` |
 | `Accept-Language` | Language-tag устройства (напр. `ru-RU`) |
@@ -200,7 +206,7 @@ sort-order: ping
 При включённой отправке HWID дополнительно:
 
 | Заголовок | Описание |
-|---|---|
+| --- | --- |
 | `x-hwid` | Аппаратный идентификатор ([подробнее](hwid.md)) |
 | `X-Device-ID` | Alias для `x-hwid` на Android (некоторые сервер-стеки ожидают именно этот заголовок) |
 | `x-device-os` | Платформа (`iOS`, `Android`, `Linux`, `Windows`) |

@@ -1,3 +1,7 @@
+---
+title: "Premium API"
+---
+
 # Premium API
 
 Система управления подписками с шифрованием на основе доменных хешей. Позволяет провайдерам настраивать внешний вид приложения, параметры серверов и уведомления для своих пользователей.
@@ -12,7 +16,7 @@
 
 ### Endpoint
 
-```
+```text
 GET /api/subscription/config?h=<sha256hex>&hwid=<sha256hex>
 ```
 
@@ -25,7 +29,7 @@ GET /api/subscription/config?h=<sha256hex>&hwid=<sha256hex>
 
 Хеш вычисляется от домена в нижнем регистре:
 
-```
+```text
 SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d2125586ce1947"
 ```
 
@@ -67,7 +71,7 @@ SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d21
 Компоненты ответа:
 
 | Поле | Описание |
-|---|---|
+| --- | --- |
 | `iv` | Initialization vector (base64, 12 байт) |
 | `data` | Зашифрованные данные (base64) |
 | `tag` | Authentication tag (base64, 16 байт) |
@@ -83,7 +87,7 @@ SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d21
 #### Базовые
 
 | Поле | Тип | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `serverDescription` | string | Описание сервера (до 30 символов) |
 | `alwaysHwidEnable` | boolean | Принудительная отправка HWID (пользователь не может отключить) |
 | `expiryNotifications` | boolean | Локальные уведомления об истечении подписки |
@@ -92,7 +96,7 @@ SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d21
 #### Domain fronting и фрагментация
 
 | Поле | Тип | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `resolveAddress` | string | IP для domain fronting |
 | `hostHeader` | string | Host-заголовок для domain fronting |
 | `fragmentEnabled` | boolean | TCP-фрагментация в hev-socks5-tunnel |
@@ -103,7 +107,7 @@ SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d21
 #### DNS-резолв адреса сервера (DoH)
 
 | Поле | Тип | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `serverAddressResolveEnable` | boolean | Предварительный резолв адреса сервера через DoH |
 | `serverAddressResolveDnsDomain` | string | URL DoH-сервера (напр. `https://common.dot.dns.yandex.net/dns-query`) |
 | `serverAddressResolveDnsIp` | string | IP DoH-сервера (используется до резолва его домена) |
@@ -113,7 +117,7 @@ SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d21
 Упрощённый интерфейс с ссылками на бот, канал, поддержку и (опционально) премиум. Подробнее про иконки — [icon-presets.md](icon-presets.md).
 
 | Поле | Тип | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `liteMode` | boolean | Включить упрощённый режим |
 | `liteBigButton` | boolean | Большая кнопка подключения |
 | `botUrl` | string? | Ссылка на Telegram-бот |
@@ -134,16 +138,16 @@ SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d21
 
 Подробности — [admin-hwids.md](admin-hwids.md).
 
-| Поле         | Тип        | Описание                                |
-|--------------|------------|-----------------------------------------|
-| `adminHwids` | `string[]` | Список HWID устройств с админ-правами   |
+| Поле | Тип | Описание |
+| --- | --- | --- |
+| `adminHwids` | `string[]` | Список HWID устройств с админ-правами |
 
 #### Баннер подписки
 
 Красный/произвольного цвета баннер внутри карточки подписки. Используется для апсейла / предупреждений об истечении / анонсов.
 
 | Поле | Тип | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `bannerEnabled` | boolean | Показывать баннер |
 | `bannerText` | string? | Текст баннера (белым по `bannerBgColor`) |
 | `bannerButtonText` | string? | Текст кнопки (если пусто — кнопка скрыта) |
@@ -155,16 +159,16 @@ SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d21
 
 Переопределяют выбор пользователя в настройках приложения, пока подписка активна.
 
-| Поле                   | Тип       | Описание                                                                                              |
-|------------------------|-----------|-------------------------------------------------------------------------------------------------------|
-| `forceConnectionStyle` | `string?` | Стиль кнопки подключения: `"classic"` (крупная круглая кнопка) или `"compact"` (узкий toggle внизу)   |
+| Поле | Тип | Описание |
+| --- | --- | --- |
+| `forceConnectionStyle` | `string?` | Стиль кнопки подключения: `"classic"` (крупная круглая кнопка) или `"compact"` (узкий toggle внизу) |
 
 #### Ping и сортировка
 
 Применяются при первом подключении подписки и переопределяют дефолтные настройки приложения.
 
 | Поле | Тип | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `defaultPingProtocol` | string? | Тип пинга: `tcp`, `proxy_head`, `proxy_get`, `icmp` |
 | `defaultSortOrder` | string? | Сортировка серверов: `none`, `ping`, `name` |
 | `pingOnUpdate` | boolean? | Авто-пинг всех серверов после обновления подписки |
@@ -172,7 +176,7 @@ SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d21
 #### Контент
 
 | Поле | Тип | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `announceUrl` | string? | URL для объявлений провайдера в приложении |
 | `webPageUrl` | string? | Ссылка на веб-страницу провайдера |
 
@@ -183,7 +187,7 @@ SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d21
 #### Плоские цвета
 
 | Поле | Тип | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `enabled` | boolean | Кастомная тема включена |
 | `darkMode` | boolean | Тёмный режим |
 | `accent` | string | Основной акцентный цвет (hex, напр. `"#FF6B6B"`) |
@@ -199,11 +203,11 @@ SHA256("example.com") → "a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d21
 Если задан, перекрывает плоские `accent`/`accentSecondary` для акцентных элементов и `background` для фона.
 
 | Поле | Тип | Описание |
-|---|---|---|
-| `accentGradient.stops` | GradientStop[] | 2-4 стопа (`{ color, position }`), `position` в диапазоне `0.0..1.0` |
+| --- | --- | --- |
+| `accentGradient.stops` | GradientStop\[\] | 2-4 стопа (`{ color, position }`), `position` в диапазоне `0.0..1.0` |
 | `accentGradient.angle` | number | Угол градиента в градусах `0..360` |
 | `backgroundGradient.enabled` | boolean | Включить градиентный фон |
-| `backgroundGradient.stops` | GradientStop[] | 2-3 стопа |
+| `backgroundGradient.stops` | GradientStop\[\] | 2-3 стопа |
 | `backgroundGradient.angle` | number | Угол градиента |
 
 Каждый стоп:
@@ -225,7 +229,7 @@ Premium-провайдеры имеют тарифы с ограничением
 3. Если устройство **уже зарегистрировано** — всегда получает premium (существующие устройства не блокируются)
 4. Если устройство **не зарегистрировано** — сервер считает общее количество устройств провайдера:
    - Если `totalDevices < maxDevices` — premium выдаётся
-   - Если `totalDevices >= maxDevices` — возвращается `isPremium: false` + `deviceLimitExceeded: true`
+   - Если `totalDevices >= maxDevices` — возвращается `isPremium: false` \+ `deviceLimitExceeded: true`
 
 ### Поведение клиента при `deviceLimitExceeded: true`
 
@@ -312,4 +316,4 @@ Authorization: Bearer <ADMIN_SECRET>
 Для корректной работы проверки лимитов необходим составной индекс:
 
 - **Коллекция:** `devices`
-- **Поля:** `hwidHash` (ASC), `subscriptionDomainHash` (ASC)`
+- **Поля:** `hwidHash` (ASC), `subscriptionDomainHash` (ASC)\`

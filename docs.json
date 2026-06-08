@@ -25,7 +25,6 @@
           "docs",
           "admin-hwids",
           "app-management",
-          "auction",
           "autorouting",
           "deep-links",
           "examples",
@@ -35,15 +34,18 @@
           "routing",
           "share-links",
           "subscription-format"
-        ]
+        ],
+        "expanded": true
       },
       {
         "group": "Premium",
         "pages": [
           "premium-api",
           "premium-billing",
-          "provider-notifications"
-        ]
+          "provider-notifications",
+          "auction"
+        ],
+        "expanded": true
       }
     ]
   },
@@ -55,7 +57,7 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:main@incy.cc"
       }
     ],
     "primary": {
@@ -78,9 +80,7 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/mintlify"
     }
   },
   "interaction": {
