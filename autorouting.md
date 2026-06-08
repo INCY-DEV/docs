@@ -1,11 +1,13 @@
-# Автообновляемая маршрутизация (Autorouting)
+---
+title: "Автообновляемая маршрутизация (Autorouting)"
+---
 
 Расширение функционала [маршрутизации](routing.md), позволяющее привязать профиль к удалённому URL-источнику. Профиль периодически скачивается и обновляется автоматически.
 
 ## Отличие от Routing
 
-| | Routing | Autorouting |
-|---|---|---|
+|  | Routing | Autorouting |
+| --- | --- | --- |
 | Данные | Base64-профиль передаётся один раз | URL-источник, профиль скачивается по нему |
 | Обновление | Только при обновлении подписки | Автоматически по интервалу (по умолчанию 24ч) |
 | `sourceURL` | Не устанавливается | Устанавливается — профиль привязан к URL |
@@ -14,7 +16,7 @@
 ## Типы ссылок
 
 | Формат ссылки | Описание |
-|---|---|
+| --- | --- |
 | `://autorouting/onadd/{url}` | Скачивает профиль по URL, устанавливает автообновление и активирует |
 | `://autorouting/add/{url}` | Скачивает профиль по URL, устанавливает автообновление |
 
@@ -30,6 +32,7 @@
 - `://routing/` → **routing** (одноразовый импорт, без `sourceURL`, без автообновления)
 
 Примеры:
+
 ```text
 ://autorouting/onadd/https://example.com/profile.json   → autorouting (автообновление)
 ://routing/onadd/https://example.com/profile.json        → routing (одноразовый импорт)
@@ -40,7 +43,7 @@
 
 Заголовок `autorouting` содержит URL, по которому доступен JSON-профиль маршрутизации:
 
-```
+```text
 HTTP/2 200
 autorouting: https://raw.githubusercontent.com/user/repo/main/profile.json
 ```
@@ -51,7 +54,7 @@ autorouting: https://raw.githubusercontent.com/user/repo/main/profile.json
 
 Строка autorouting размещается в теле подписки наряду с серверными конфигурациями:
 
-```
+```text
 vless://uuid@server1:443?security=tls#Server1
 vless://uuid@server2:443?security=tls#Server2
 ://autorouting/onadd/https://raw.githubusercontent.com/user/repo/main/profile.json
@@ -62,7 +65,7 @@ vless://uuid@server2:443?security=tls#Server2
 При наличии нескольких источников маршрутизации используется **первый найденный**:
 
 | Приоритет | Источник | Тип |
-|---|---|---|
+| --- | --- | --- |
 | 1 (высший) | Заголовок `autorouting` | Автообновляемый |
 | 2 | Body — строка с URL | Автообновляемый |
 | 3 | Заголовок `routing` | Статический |
@@ -74,7 +77,7 @@ vless://uuid@server2:443?security=tls#Server2
 
 Ссылки на файлы в GitHub-репозиториях автоматически конвертируются из «blob» формата в «raw»:
 
-```
+```text
 https://github.com/user/repo/blob/main/path/profile.json
 →
 https://raw.githubusercontent.com/user/repo/main/path/profile.json
@@ -99,6 +102,7 @@ incy://routing/onadd/ewogICJOYW1lIjogIlJvc2NvbVZQTiIKfQ==
 Приложение извлечёт base64-данные и декодирует профиль.
 
 **2. JSON-профиль (рекомендуемый):**
+
 ```json
 {
     "Name": "RoscomVPN",
@@ -138,7 +142,7 @@ ewogICAgIk5hbWUiOiAiUm9zY29tVlBOIiwKICAgICJHbG9iYWxQcm94eSI6ICJ0cnVlIgp9
 ### Интервалы обновления
 
 | Значение (сек) | Отображение |
-|---|---|
+| --- | --- |
 | `43200` | 12 часов |
 | `86400` | 24 часа **(по умолчанию)** |
 | `259200` | 3 дня |

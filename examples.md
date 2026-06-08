@@ -1,4 +1,6 @@
-# Примеры ссылок и параметров
+---
+title: "Примеры ссылок и параметров"
+---
 
 Готовые примеры для интеграции маршрутизации и автообновляемой маршрутизации в подписки INCY.
 
@@ -10,13 +12,13 @@
 
 Добавляет и активирует профиль из base64-данных:
 
-```
+```text
 ://routing/onadd/eyJOYW1lIjoiUm9zY29tVlBOIiwiR2xvYmFsUHJveHkiOiJ0cnVlIiwiUmVtb3RlRE5TVHlwZSI6IkRvSCIsIlJlbW90ZUROU0RvbWFpbiI6Imh0dHBzOi8vY2xvdWRmbGFyZS1kbnMuY29tL2Rucy1xdWVyeSIsIlJlbW90ZUROU0lQIjoiMS4xLjEuMSIsIkRvbWVzdGljRE5TVHlwZSI6IkRvSCIsIkRvbWVzdGljRE5TRG9tYWluIjoiaHR0cHM6Ly9kbnMuZ29vZ2xlL2Rucy1xdWVyeSIsIkRvbWVzdGljRE5TSVAiOiI4LjguOC44IiwiRG9tYWluU3RyYXRlZ3kiOiJJUElmTm9uTWF0Y2gifQ==
 ```
 
 Добавляет профиль без активации:
 
-```
+```text
 ://routing/add/eyJOYW1lIjoiUm9zY29tVlBOIn0=
 ```
 
@@ -24,13 +26,13 @@
 
 Скачивает профиль по URL и устанавливает автообновление:
 
-```
+```text
 ://autorouting/onadd/https://raw.githubusercontent.com/user/repo/main/profile.json
 ```
 
 Через `routing/onadd/` с URL (URL обнаруживается автоматически):
 
-```
+```text
 ://routing/onadd/https://raw.githubusercontent.com/user/repo/main/profile.json
 ```
 
@@ -38,13 +40,13 @@
 
 Обычные GitHub-ссылки конвертируются автоматически:
 
-```
+```text
 ://autorouting/onadd/https://github.com/user/repo/blob/main/INCY/DEFAULT.JSON
 ```
 
 Приложение автоматически преобразует в:
 
-```
+```text
 https://raw.githubusercontent.com/user/repo/main/INCY/DEFAULT.JSON
 ```
 
@@ -54,7 +56,7 @@ https://raw.githubusercontent.com/user/repo/main/INCY/DEFAULT.JSON
 
 ### Autorouting — автообновляемый профиль
 
-```
+```text
 HTTP/2 200
 content-type: text/plain
 autorouting: https://raw.githubusercontent.com/user/repo/main/profile.json
@@ -65,7 +67,7 @@ vless://uuid@server2:443?security=tls&type=ws#Server 2
 
 ### Routing — статический профиль (base64)
 
-```
+```text
 HTTP/2 200
 content-type: text/plain
 routing: ewogICJOYW1lIjogIlJvc2NvbVZQTiIsCiAgIkdsb2JhbFByb3h5IjogInRydWUiCn0=
@@ -75,7 +77,7 @@ vless://uuid@server1:443?security=tls#Server1
 
 ### Routing — статический профиль (полная ссылка)
 
-```
+```text
 HTTP/2 200
 content-type: text/plain
 routing: ://routing/onadd/ewogICJOYW1lIjogIlJvc2NvbVZQTiIsCiAgIkdsb2JhbFByb3h5IjogInRydWUiCn0=
@@ -85,7 +87,7 @@ vless://uuid@server1:443?security=tls#Server1
 
 ### Комбинация заголовков
 
-```
+```text
 HTTP/2 200
 content-type: text/plain
 profile-title: My VPN
@@ -105,7 +107,7 @@ vless://uuid@server3:443?security=tls#FI
 
 ### Autorouting в body
 
-```
+```text
 vless://uuid@server1:443?security=tls#Server1
 vless://uuid@server2:443?security=tls#Server2
 ://autorouting/onadd/https://raw.githubusercontent.com/user/repo/main/profile.json
@@ -113,7 +115,7 @@ vless://uuid@server2:443?security=tls#Server2
 
 ### Routing в body
 
-```
+```text
 vless://uuid@server1:443?security=tls#Server1
 vless://uuid@server2:443?security=tls#Server2
 ://routing/onadd/ewogICJOYW1lIjogIlJvc2NvbVZQTiIsCiAgIkdsb2JhbFByb3h5IjogInRydWUiCn0=
@@ -123,7 +125,7 @@ vless://uuid@server2:443?security=tls#Server2
 
 Все метаданные через `#` комментарии — полезно при раздаче подписок как статических файлов (nginx), где нет возможности задать кастомные HTTP-заголовки:
 
-```
+```text
 #profile-update-interval: 1
 #profile-title: Обход белых списков
 #support-url: https://t.me/+example
@@ -139,7 +141,7 @@ vless://uuid@server2:443?security=tls#DE
 
 HTTP-заголовки имеют приоритет. Body-метаданные используются как fallback:
 
-```
+```text
 HTTP/2 200
 content-type: text/plain
 profile-title: VPN Pro
@@ -229,7 +231,7 @@ vless://uuid@server2:443?security=tls#DE
 
 Для оптимизации трафика размещайте SHA-256 хеш-файлы рядом с геофайлами:
 
-```
+```text
 https://example.com/geo/geoip.dat
 https://example.com/geo/geoip.dat.sha256
 https://example.com/geo/geosite.dat
@@ -238,7 +240,7 @@ https://example.com/geo/geosite.dat.sha256
 
 Содержимое `.sha256` файла — hex-строка SHA-256 хеша (64 символа):
 
-```
+```text
 38c25fea171323e0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4
 ```
 
@@ -259,12 +261,12 @@ sha256sum geosite.dat | awk '{print $1}' > geosite.dat.sha256
 
 ### mKCP с кастомными MTU и TTI
 
-```
+```text
 vless://uuid@server:443?security=none&type=kcp&headerType=srtp&seed=myseed&mtu=1400&tti=20#mKCP Server
 ```
 
 | Параметр | Значение | Описание |
-|---|---|---|
+| --- | --- | --- |
 | `type` | `kcp` | Транспорт mKCP |
 | `headerType` | `srtp` | Маскировка под SRTP |
 | `seed` | `myseed` | Обфускация |
@@ -273,12 +275,12 @@ vless://uuid@server:443?security=none&type=kcp&headerType=srtp&seed=myseed&mtu=1
 
 ### XHTTP
 
-```
+```text
 vless://uuid@server:443?security=tls&type=xhttp&mode=auto&path=/xhttp#XHTTP Server
 ```
 
-### VLESS + REALITY
+### VLESS \+ REALITY
 
-```
+```text
 vless://uuid@server:443?security=reality&type=tcp&flow=xtls-rprx-vision&sni=example.com&fp=chrome&pbk=PUBLIC_KEY&sid=SHORT_ID&spx=%2F#REALITY Server
 ```

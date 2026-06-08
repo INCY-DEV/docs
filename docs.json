@@ -18,7 +18,29 @@
         ]
       }
     ],
-    "groups": []
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": [
+          "admin-hwids",
+          "app-management",
+          "auction",
+          "autorouting",
+          "deep-links",
+          "examples",
+          "full-xray-config",
+          "hwid",
+          "icon-presets",
+          "premium-api",
+          "premium-billing",
+          "provider-notifications",
+          "routing",
+          "README",
+          "share-links",
+          "subscription-format"
+        ]
+      }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",

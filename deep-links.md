@@ -1,4 +1,6 @@
-# Deep Links
+---
+title: "Deep Links"
+---
 
 Приложение поддерживает deep link ссылки для управления VPN, импорта конфигураций и настройки маршрутизации.
 
@@ -9,7 +11,7 @@
 ## Управление VPN
 
 | Ссылка | Описание |
-|---|---|
+| --- | --- |
 | `://connect` или `://open` | Подключить VPN |
 | `://disconnect` или `://close` | Отключить VPN |
 | `://toggle` | Переключить состояние VPN |
@@ -27,7 +29,7 @@
 
 Прямое добавление серверов через протокольные ссылки:
 
-```
+```text
 vless://uuid@server:443?security=tls&type=ws&sni=example.com#Server Name
 vmess://eyJhZGQiOiJzZXJ2ZXIiLCJwb3J0Ijo0NDN9
 trojan://password@server:443?security=tls&sni=example.com#Server Name
@@ -40,7 +42,7 @@ wireguard://secretKey@server:51820?publickey=KEY&address=10.0.0.2#Server Name
 ## Маршрутизация
 
 | Ссылка | Описание |
-|---|---|
+| --- | --- |
 | `://routing/add/{base64}` | Добавить профиль маршрутизации |
 | `://routing/onadd/{base64}` | Добавить и сразу активировать профиль |
 | `://routing/onadd/{url}` | Скачать профиль по URL (одноразовый импорт, без автообновления) |
@@ -54,7 +56,7 @@ wireguard://secretKey@server:51820?publickey=KEY&address=10.0.0.2#Server Name
 
 Для совместимости поддерживается передача данных через query-параметр `data` (Android, iOS):
 
-```
+```text
 ://routing/add?data={base64}
 ://routing/onadd?data={base64}
 ```
@@ -71,17 +73,20 @@ wireguard://secretKey@server:51820?publickey=KEY&address=10.0.0.2#Server Name
 ## Примеры
 
 ### Подключение VPN
-```
+
+```text
 incy://connect
 ```
 
 ### Импорт подписки
-```
+
+```text
 incy://import/https://example.com/api/subscription/abc123
 ```
 
 ### Добавление сервера
-```
+
+```text
 incy://add/vless://uuid@server:443?security=tls#MyServer
 ```
 

@@ -1,4 +1,6 @@
-# Управление приложением
+---
+title: "Управление приложением"
+---
 
 Параметры для управления поведением приложения через HTTP-заголовки подписки и строки в теле ответа.
 
@@ -7,14 +9,16 @@
 Все параметры можно передавать двумя способами:
 
 **1. HTTP-заголовок:**
-```
+
+```text
 HTTP/2 200
 profile-title: Мой VPN
 support-url: https://t.me/support
 ```
 
 **2. Строка в теле подписки (комментарий с `#`):**
-```
+
+```text
 #profile-title: Мой VPN
 #support-url: https://t.me/support
 #profile-update-interval: 6
@@ -33,21 +37,25 @@ vless://...
 Название профиля подписки. Максимум 25 символов. Можно передавать как текст или base64 (UTF-8).
 
 **Заголовок:**
-```
+
+```text
 profile-title: Мой VPN
 ```
 
 **В теле подписки:**
-```
+
+```text
 #profile-title: Мой VPN
 ```
 
 **Base64 с описанием** (первая строка — имя, остальные — описание):
-```
+
+```text
 profile-title: base64:0JzQvtC5IFZQTgrQlNC+0LHRgNC+INC/0L7QttCw0LvQvtCy0LDRgtGM
 ```
 
 **Альтернативные заголовки** (fallback, если `profile-title` отсутствует):
+
 - `subscription-name` — альтернативное имя подписки
 - `content-disposition` — имя файла из заголовка (расширения `.txt`, `.yaml`, `.yml` удаляются автоматически)
 
@@ -55,7 +63,7 @@ profile-title: base64:0JzQvtC5IFZQTgrQlNC+0LHRgNC+INC/0L7QttCw0LvQvtCy0LDRgtGM
 
 Отдельный заголовок для описания, если оно не включено в `profile-title`:
 
-```
+```text
 profile-description: Быстрые серверы в Европе
 ```
 
@@ -67,13 +75,13 @@ profile-description: Быстрые серверы в Европе
 
 **Заголовок:**
 
-```
+```text
 profile-update-interval: 6
 ```
 
 **В теле подписки:**
 
-```
+```text
 #profile-update-interval: 6
 ```
 
@@ -81,18 +89,18 @@ profile-update-interval: 6
 
 Информация о балансе, объёме использованного трафика и сроке действия подписки. Поля разделяются точкой с запятой.
 
-```
+```text
 subscription-userinfo: upload=0;download=1073741824;total=10737418240;expire=1700000000
 ```
 
 | Поле | Описание |
-|---|---|
+| --- | --- |
 | `upload` | Исходящий трафик (байт) |
 | `download` | Входящий трафик (байт) |
 | `total` | Лимит трафика (байт) |
 | `expire` | Дата истечения (Unix timestamp, секунды) |
 
-> Если `expire` > 32 000 000 000 — значение интерпретируется как миллисекунды и конвертируется в секунды.
+> Если `expire` \> 32 000 000 000 — значение интерпретируется как миллисекунды и конвертируется в секунды.
 
 ### Ссылка на поддержку
 
@@ -100,13 +108,13 @@ subscription-userinfo: upload=0;download=1073741824;total=10737418240;expire=170
 
 **Заголовок:**
 
-```
+```text
 support-url: https://t.me/your_support_bot
 ```
 
 **В теле подписки:**
 
-```
+```text
 #support-url: https://t.me/your_support_bot
 ```
 
@@ -116,13 +124,13 @@ support-url: https://t.me/your_support_bot
 
 **Заголовок:**
 
-```
+```text
 profile-web-page-url: https://your-site.com
 ```
 
 **В теле подписки:**
 
-```
+```text
 #profile-web-page-url: https://your-site.com
 ```
 
@@ -133,24 +141,26 @@ profile-web-page-url: https://your-site.com
 Текстовое объявление (до 200 символов). Можно передавать как текст или base64.
 
 **Заголовок:**
-```
+
+```text
 announce: Плановое обслуживание 15 марта с 03:00 до 05:00 MSK
 ```
 
 **Base64:**
-```
+
+```text
 announce: base64:0J/Qu9Cw0L3QvtCy0L7QtSDQvtCx0YHQu9GD0LbQuNCy0LDQvdC40LU=
 ```
 
 **URL объявления** (ссылка, не текст):
 
-```
+```text
 announce-url: https://example.com/news
 ```
 
 **В теле подписки:**
 
-```
+```text
 #announce: Плановое обслуживание 15 марта
 #announce-url: https://example.com/news
 vless://uuid@server:443#Server
@@ -203,7 +213,7 @@ vless://uuid@server:443#Server
 
 Статический профиль в base64. Подробнее — [routing.md](routing.md).
 
-```
+```text
 routing: ://routing/onadd/ewog...base64...
 ```
 
@@ -211,7 +221,7 @@ routing: ://routing/onadd/ewog...base64...
 
 URL-источник профиля маршрутизации с периодическим обновлением. Подробнее — [autorouting.md](autorouting.md).
 
-```
+```text
 autorouting: https://raw.githubusercontent.com/user/repo/main/profile.json
 ```
 
@@ -220,7 +230,7 @@ autorouting: https://raw.githubusercontent.com/user/repo/main/profile.json
 Если профиль маршрутизации указан в нескольких местах, используется **первый найденный** по приоритету:
 
 | Приоритет | Источник |
-|---|---|
+| --- | --- |
 | 1 (высший) | Заголовок `autorouting` |
 | 2 | Body — строка с URL (`://autorouting/onadd/`, `://autorouting/add/`) |
 | 3 | Заголовок `routing` |
@@ -234,7 +244,7 @@ autorouting: https://raw.githubusercontent.com/user/repo/main/profile.json
 
 Дополнительная подпись, отображаемая под именем сервера (максимум 30 символов). Добавляется после `title` через разделитель `?`:
 
-```
+```text
 vless://uuid@server:443#Сервер1?serverDescription=base64-text
 ```
 
@@ -244,7 +254,7 @@ vless://uuid@server:443#Сервер1?serverDescription=base64-text
 
 Android VpnService позволяет пропускать через VPN только **выбранные приложения** либо наоборот — **исключать** их из туннеля. Провайдер может форсировать этот режим через три заголовка:
 
-```
+```text
 per-app-proxy-enable: 1
 per-app-proxy-mode: bypass
 per-app-proxy-list: com.android.chrome,org.telegram.messenger
@@ -262,19 +272,19 @@ per-app-proxy-list: com.android.chrome,org.telegram.messenger
 
 **Inline (CSV или строчный):**
 
-```
+```text
 per-app-proxy-list: com.android.chrome,org.telegram.messenger,com.google.android.youtube
 ```
 
 **Base64 (для длинных списков):**
 
-```
+```text
 per-app-proxy-list: base64:Y29tLmFuZHJvaWQuY2hyb21lCm9yZy50ZWxlZ3JhbS5tZXNzZW5nZXI=
 ```
 
 **Удалённый URL:**
 
-```
+```text
 per-app-proxy-list: https://example.com/myapps.txt
 ```
 
@@ -292,7 +302,7 @@ per-app-proxy-list: https://example.com/myapps.txt
 
 Перезаписывает глобальные настройки фрагментации пользователя для данной подписки.
 
-```
+```text
 fragmentation-enable: 1
 fragmentation-packets: tlshello
 fragmentation-length: 10-30
@@ -314,7 +324,7 @@ fragmentation-interval: 10-30
 
 Отправка случайных UDP-пакетов перед VPN-handshake'ом для маскировки. Актуально в первую очередь для WireGuard и Hysteria2 в сетях с глубокой инспекцией трафика.
 
-```
+```text
 noises-enable: 1
 noises-type: rand
 noises-packet: 10-20
@@ -334,7 +344,7 @@ noises-delay: 10-50
 
 Bootstrap-резолв домена сервера через DNS-over-HTTPS до установки туннеля. Полезно когда провайдерский DNS подменяет адрес VPN-сервера.
 
-```
+```text
 server-address-resolve-enable: 1
 server-address-resolve-dns-domain: https://common.dot.dns.yandex.net/dns-query
 server-address-resolve-dns-ip: 77.88.8.8
@@ -354,7 +364,7 @@ server-address-resolve-dns-ip: 77.88.8.8
 
 Дополнительная кнопка в карточке подписки — ведёт на страницу покупки или личный кабинет провайдера.
 
-```
+```text
 premium-url: https://example.com/pricing
 ```
 
@@ -372,13 +382,13 @@ premium-url: https://example.com/pricing
 
 **Заголовок:**
 
-```
+```text
 hide-url: 1
 ```
 
 **В теле подписки:**
 
-```
+```text
 #hide-url: 1
 vless://...
 ```
@@ -440,15 +450,15 @@ vless://...
 
 Эти параметры хранятся в [Premium API](premium-api.md) конфигурации провайдера и применяются клиентом только если домен подписки принадлежит Premium-провайдеру. Включить их «через подписку без аккаунта в панели» нельзя — это by design.
 
-| Группа                | Что настраивается                                                                 | Ссылка                                                   |
-|-----------------------|-----------------------------------------------------------------------------------|----------------------------------------------------------|
-| Lite Mode             | Упрощённый интерфейс, ссылки на бот/канал/поддержку + [пресет-иконки](icon-presets.md) | [premium-api.md § Lite Mode](premium-api.md#lite-mode)          |
-| Баннер подписки       | Текст + цвета + кнопка в карточке подписки                                        | [premium-api.md § Баннер подписки](premium-api.md#баннер-подписки) |
-| Кастомная тема        | Плоские цвета и градиенты для аккаунта / фона                                     | [premium-api.md § Кастомная тема](premium-api.md#кастомная-тема-theme) |
-| Force-настройки       | `forceConnectionStyle`: классическая круглая кнопка vs compact-toggle             | [premium-api.md § Принудительные настройки](premium-api.md#принудительные-настройки) |
-| Ping и сортировка     | `defaultPingProtocol`, `defaultSortOrder`, `pingOnUpdate`                         | [premium-api.md § Ping и сортировка](premium-api.md#ping-и-сортировка) |
-| Domain fronting       | `resolveAddress` / `hostHeader` (связка SNI ↔ Host для маскировки)                | [premium-api.md § Domain fronting и фрагментация](premium-api.md#domain-fronting-и-фрагментация) |
-| Админ-доступ по HWID  | `adminHwids` + auto-approve пушей                                                  | [admin-hwids.md](admin-hwids.md)                         |
-| Push-уведомления      | Модерация, таргетинг, отмена                                                      | [provider-notifications.md](provider-notifications.md)   |
+| Группа | Что настраивается | Ссылка |
+| --- | --- | --- |
+| Lite Mode | Упрощённый интерфейс, ссылки на бот/канал/поддержку \+ [пресет-иконки](icon-presets.md) | [premium-api.md § Lite Mode](premium-api.md#lite-mode) |
+| Баннер подписки | Текст \+ цвета \+ кнопка в карточке подписки | [premium-api.md § Баннер подписки](premium-api.md#баннер-подписки) |
+| Кастомная тема | Плоские цвета и градиенты для аккаунта / фона | [premium-api.md § Кастомная тема](premium-api.md#кастомная-тема-theme) |
+| Force-настройки | `forceConnectionStyle`: классическая круглая кнопка vs compact-toggle | [premium-api.md § Принудительные настройки](premium-api.md#принудительные-настройки) |
+| Ping и сортировка | `defaultPingProtocol`, `defaultSortOrder`, `pingOnUpdate` | [premium-api.md § Ping и сортировка](premium-api.md#ping-и-сортировка) |
+| Domain fronting | `resolveAddress` / `hostHeader` (связка SNI ↔ Host для маскировки) | [premium-api.md § Domain fronting и фрагментация](premium-api.md#domain-fronting-и-фрагментация) |
+| Админ-доступ по HWID | `adminHwids` \+ auto-approve пушей | [admin-hwids.md](admin-hwids.md) |
+| Push-уведомления | Модерация, таргетинг, отмена | [provider-notifications.md](provider-notifications.md) |
 
 > **Фрагментация, шумы и DoH-резолв** доступны через **оба** канала: HTTP-заголовками подписки (см. выше) или через Premium API. При Premium-подписке API-значения приоритетнее заголовков.
